@@ -1,13 +1,13 @@
-import logo from "./logo.svg";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import DetailDocument from "./pages/DetailDocument";
+import Document from "./pages/Document";
 import HomePage from "./pages/Home";
 import LuyenDe from "./pages/LuyenDe";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Document from "./pages/Document";
-import DetailDocument from "./pages/DetailDocument";
+import ListPart from "./pages/LuyenDe/ListPart";
+import Irregular from "./pages/Irregular";
 
 function App() {
   return (
@@ -19,14 +19,23 @@ function App() {
           {/* // children props component */}
           <HomePage />
         </Route>
-        <Route path="/exercise">
+        <Route exact path="/exercise">
           <LuyenDe />
+        </Route>
+        <Route path="/exercise/:id">
+          <ListPart />
         </Route>
 
         <Route exact path="/document">
           <Document />
         </Route>
+
         <Route path="/document/:id">
+          <DetailDocument />
+        </Route>
+
+        <Route path="/360-irregular">
+          <Irregular />
         </Route>
       </Switch>
       <Footer />

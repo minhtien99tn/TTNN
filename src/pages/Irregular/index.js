@@ -1,20 +1,18 @@
 import { Row, Typography } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
 
 const { Title } = Typography;
 
-const URL = "https://nikaws.cf/api/getdetaillythuyetby";
-const DetailDocument = (props) => {
-  const { id } = useParams();
+const URL = "https://nikaws.cf/api/getdetaillythuyetby/10";
+const Irregular = (props) => {
   const [data, setData] = React.useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getListDocument = async () => {
       await axios
-        .get(`${URL}/${id}`)
+        .get(URL)
         .then(({ data }) => {
           setData(data.detailLythuyet);
         })
@@ -26,7 +24,7 @@ const DetailDocument = (props) => {
         });
     };
     getListDocument();
-  }, [id]);
+  }, []);
 
   console.log(data);
   return (
@@ -41,6 +39,6 @@ const DetailDocument = (props) => {
   );
 };
 
-DetailDocument.propTypes = {};
+Irregular.propTypes = {};
 
-export default DetailDocument;
+export default Irregular;

@@ -1,34 +1,61 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { Card, Row } from "antd";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import fakeJson from "../../config/data.json";
+
+const { Meta } = Card;
+
+const URL = "https://nikaws.cf/api/getlistlythuyet";
 
 const Document = (props) => {
+  const [documentList, setDocumentList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const getListDocument = async () => {
+      // await promise ?
+      // asynchronous : callback - promise - async-await
+      await axios
+        .get(URL)
+        .then(({ data }) => {
+          setDocumentList(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    };
+    getListDocument();
+  }, []);
+
   return (
     <div className="container">
-      <div className="row mt-3">
-        {fakeJson.map((data) => (
-          <div className="col-4">
-            <div className="card-deck">
-              <div className="card">
-                <Link to={`/Document/${data.id}`}>
-                  <img alt="" className="card-img-top" src={data.anh} />
+      {isLoading ? (
+        <div> Loading ...</div>
+      ) : (
+        <Row  className="mt-3">
+          {documentList.map((data) => (
+            <div key={data.id} className="col-3 mb-4">
+              <Card
+                hoverable
+                style={{ width: 240 }}
+                cover={
+                  <img
+                    alt="example"
+                    src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                  />
+                }
+              >
+                <Link to={`/document/${data.id}`}>
+                  <Meta title={data.ten_lythuyet} description="More" />
                 </Link>
-
-                <div className="card-body">
-                  <h4 className="card-title">
-                    <Link to={`/documen/${data.id}`}>
-                    {data.tieuDe}
-                    </Link>
-                  </h4>
-                  <p className="card-text">{data.noiDung}</p>
-                </div>
-              </div>
+              </Card>
             </div>
-            <hr />
-          </div>
-        ))}
-      </div>
+          ))}
+        </Row>
+      )}
     </div>
   );
 };

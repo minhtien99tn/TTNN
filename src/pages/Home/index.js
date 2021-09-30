@@ -34,7 +34,7 @@ const HomePage = () => {
                     <i className="bx bx-file" />
                   </div>
                   <h4 className="title">
-                  <Link to="/document">Document</Link>
+                    <Link to="/document">Document</Link>
                   </h4>
                   <p className="description">
                     Duis aute irure dolor in reprehenderit in voluptate velit
@@ -52,7 +52,9 @@ const HomePage = () => {
                     <i className="bx bx-tachometer" />
                   </div>
                   <h4 className="title">
-                  <Link to="/detail-document">Detail Document</Link>
+                    <Link to="/360-irregular">
+                      360 irregular verbs (Động Từ Bất Quy Tắc)
+                    </Link>
                   </h4>
                   <p className="description">
                     Excepteur sint occaecat cupidatat non proident, sunt in
